@@ -1,0 +1,61 @@
+
+samples:
+  nos4U_1: "data/fastqs/nos4U_1/"
+  s4U_1: "data/fastqs/s4U_1/"
+
+ctl_samples: ["nos4U_1"]
+
+
+genome_fasta: "data/genomes/genome.fasta"
+genome_gtf: "data/genomes/genome.gtf"
+
+adapters: "-a ^CGATC...GATCGGAAGAGC -a ^CGATC...GGAAGAGCACAC -A GATCGAGATCGGAAGAGC"
+cutadapt_extra: "--minimum-length=20 -n 2"
+
+fastqc_extra: ""
+
+multiqc_extra: "--verbose --dirs"
+
+align_ctl_extra: ""
+
+
+### Aligners
+
+# Options:
+  # 1) "ngm" = NextGeneMap
+  # 2) "bismark" = Bismark-assisted 3-base alignment with bowtie2
+  # 3) "bowtie2" = bowtie2 4-base alignment
+s4U_aligner: "ngm"
+
+
+# Align to provided genome or called TSSome?
+  # 1) "provided": use provided genome FASTA
+  # 2) "TSSome": use called TSSome
+align_target: "TSSome"
+
+
+### Path to index directories and prefixes
+bowtie2_index: "index/genome"
+
+bowtie2_TSS_index: "TSS_index/TSS"
+
+bowtie2_build_TSSome_extra: ""
+bowtie2_build_genome_extra: ""
+
+
+
+### TSScall parameters
+
+TSScall_fdr: 0.001
+TSScall_utss_filter_size: 750
+TSScall_utss_search_window: 250
+TSScall_bidirectional_thresh: 1000
+TSScall_cluster_thresh: 1000
+TSScall_call_method: "bin_winner"
+TSScall_bin_winner_size: 200
+
+
+### TSSome creation parameters
+
+createTSSome_extra: ""
+
