@@ -3,7 +3,7 @@ rule multiqc:
     input:
         expand(
             "results/fastqc/{sample}_r{read}.{ext}",
-            sample=SAMPLE_NAMES,
+            sample=SAMP_NAMES,
             read=["1", "2"],
             ext=["html", "zip"],
         ),
