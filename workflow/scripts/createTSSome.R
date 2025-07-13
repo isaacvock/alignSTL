@@ -90,22 +90,7 @@ TSSbed <- fread(
 )
 
 TSSdeets <- fread(
-  opt$details,
-  skip = 1,
-  header = FALSE,
-  col.names = c("TSSid", "Type", "transcripts",
-                "gene_id", "strand", "seqnames",
-                "position", "coverage", 
-                "divergent",
-                "divergent_partner", "divergent_distance",
-                "convergent", 
-                "convergent_partner", "convergent_distance",
-                "TSS_cluster", "TSSs_in_cluster",
-                "db_xref", "gbkey", "gene", "pseudo",
-                "product", "transcript_biotype", "tag",
-                "inference", "note", "exception", "partial",
-                "standard_name", "anticodon", "codons",
-                "12S_rRNA", "16S_rRNA")
+  opt$details
 )
 
 
@@ -124,7 +109,7 @@ if(!opt$keep_uTSS){
   
   TSSdeets <- TSSdeets %>%
     dplyr::filter(
-      !grepl("^uTSS", TSSid)
+      !grepl("^uTSS", `TSS ID`)
     )
   
 }
@@ -174,8 +159,8 @@ mcols(TSSgr_merged)$TSSid <- sapply(
     # NOTE: may be redundant if keep_uTSS == FALSE, as I think
     # observed TSS are those that can be mapped to a gene.
     TSS_table <- TSSdeets %>%
-      dplyr::filter(TSSid %in% possible_TSS) %>%
-      dplyr::select(TSSid, gene_id) %>%
+      dplyr::filter(`TSS ID` %in% possible_TSS) %>%
+      dplyr::select(`TSS ID`, `Gene ID`) %>%
       na.omit()
     
     if(nrow(TSS_table) == 0){

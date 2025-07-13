@@ -147,6 +147,8 @@ rule callTSS:
         cluster_thresh=config.get("TSScall_cluster_thresh"),
         call_method=config.get("TSScall_call_method"),
         bin_winner_size=config.get("TSScall_bin_winner_size"),
+        a_search_win=config.get("annotation_search_window", 1000),
+        a_join_dist=config.get("annotation_join_distance", 200),
     log:
         "logs/callTSS/callTSS.log"
     conda:
@@ -166,6 +168,8 @@ rule callTSS:
             --annotation_file {input.anno} \
             --call_method {params.call_method} \
             --bin_winner_size {params.bin_winner_size} \
+            --annotation_search_window {params.a_search_win} \
+            --annotation_join_distance {params.a_join_dist} \
             {input.fwd} {input.rev} {input.chrom} {output.bed} \
             &> {log}
         """

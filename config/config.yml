@@ -54,6 +54,8 @@ TSScall_bidirectional_thresh: 1000
 TSScall_cluster_thresh: 1000
 TSScall_call_method: "bin_winner"
 TSScall_bin_winner_size: 200
+annotation_search_window: 1000
+annotation_join_distance: 200
 
 
 ### TSSome creation parameters
