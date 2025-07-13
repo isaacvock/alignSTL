@@ -48,7 +48,7 @@ else:
         input:
             get_input_fastqs,
         output:
-            fastq1="results/trimmed/{sample}.1.fastq",
+            fastq="results/trimmed/{sample}.1.fastq",
             qc="trimmed/{sample}.qc.txt",
         params:
             adapters=config["adapters"],
