@@ -132,7 +132,7 @@ rule callTSS:
         call_method=config.get("TSScall_call_method"),
         bin_winner_size=config.get("TSScall_bin_winner_size"),
     log:
-        "logs/callTSS/{ctl}.log"
+        "logs/callTSS/callTSS.log"
     conda:
         "../envs/TSScall.yml"
     threads: 1
