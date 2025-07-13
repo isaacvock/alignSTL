@@ -8,10 +8,13 @@ rule multiqc:
             ext=["html", "zip"],
         ),
     output:
-        report="results/multiqc/multiqc_report.html",
+        "results/multiqc/multiqc_report.html",
+        directory("results/multiqc_data"),
     params:
         extra=config.get("multiqc_extra", ""),
     log:
-        "results/multiqc/multiqc.log",
-    wrapper:
-        "v2.2.1/bio/multiqc"
+        "logs/multiqc/multiqc.log",
+    conda:
+        "../envs/multiqc.yaml"
+    script:
+        "../scripts/multiQC.py"
