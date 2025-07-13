@@ -74,12 +74,12 @@ else if config["s4U_aligner"] == "grandRescue":
     #         """
 
 
-else if config["s4U_aligner"] == "bismark"
+else if config["s4U_aligner"] == "bismark":
 
     # rule align_all:
     #     input:
 
-else if config["s4U_aligner"] == "bowtie2"
+else if config["s4U_aligner"] == "bowtie2":
 
     rule align_all:
         input:
