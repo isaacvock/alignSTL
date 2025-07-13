@@ -36,12 +36,12 @@ option_list <- list(
   ),
   make_option(
     c("--keep_uTSS", type = "logical"),
-    default = "FALSE",
+    default = FALSE,
     help = "Keep unobserved TSSs (name: uTSS<ID>)?"
   ),
   make_option(
     c("--merge_clusters", type = "logical"),
-    default = "TRUE",
+    default = TRUE,
     help = "Merge clusters of TSSs into a single TSS?"
   ),
   make_option(
