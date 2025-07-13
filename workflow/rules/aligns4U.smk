@@ -86,7 +86,7 @@ elif config["s4U_aligner"] == "bowtie2":
     rule align_all:
         input:
             sample=["results/trimmed/{sample}.1.fastq"],
-            idx=muitiext(
+            idx=multiext(
                 ALIGN_ALL_INDEX,
                 ".1.bt2",
                 ".2.bt2",
