@@ -23,10 +23,18 @@ rule align_ctl:
     log:
         "logs/align_ctl/{ctl}.log"
     params:
-        extra=config.get("align_ctl_extra")
+        extra=config.get("align_ctl_extra"),
+        index=config.get("bowtie2_index")
     threads: 20
-    wrapper:
-        "v7.2.0/bio/bowtie2/align"
+    conda:
+        "../envs/bowtie2.yml"
+    shell:
+        """
+        bowtie2 --threads {threads} \
+            -U {input.sample} \
+            -x {params.index} {params.extra} \
+            | samtools view -@ {threads} -h -b -o {output} - &> {log}
+        """
 
 
 ### Merge and filter bam file for TSScall

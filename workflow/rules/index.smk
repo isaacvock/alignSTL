@@ -58,3 +58,26 @@ rule bowtie2_build_TSSome:
         """
         bowtie2-build --threads {threads} {params.extra} {input.ref} {params.index} &> {log}
         """
+
+
+### bismark
+
+rule copy_genome:
+    input:
+        config.get("genome_fasta"),
+    output:
+        "bismark_genome/genome.fasta",
+    log:
+        "logs/copy_genome/copy.log"
+    shell:
+        "cp {input} {output} &> {log}"
+
+rule bismark_prepare_genome:
+    input:
+        genome="bismark_genome/genome.fasta"
+    output:
+        ""
+    shell:
+        """
+        bismark_genome_preparation --path_to_aligner ./ bismark_genome/
+        """
