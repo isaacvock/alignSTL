@@ -68,7 +68,7 @@ else:
             html="results/fastqc/{sample}_r1.html",
             zip="results/fastqc/{sample}_r1.zip",
         log:
-            "logs/fastqc/{sample}_r{read}.log",
+            "logs/fastqc/{sample}.log",
         params:
             extra=config.get("fastqc_params"),
         resources:

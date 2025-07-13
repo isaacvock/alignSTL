@@ -53,11 +53,21 @@ def get_target():
 
 def get_fastqc_read(wildcards):
     
-    return expand(
-        "results/trimmed/{SID}.{READ}.fastq",
-        SID=wildcards.sample,
-        READ=wildcards.read,
-    )
+    if config.get("PE_input", True):
+
+
+        return expand(
+            "results/trimmed/{SID}.{READ}.fastq",
+            SID=wildcards.sample,
+            READ=wildcards.read,
+        )
+
+    else:
+
+        return expand(
+            "results/trimmed/{SID}.1.fastq",
+            SID=wildcards.sample
+        )       
 
 
 def get_input_fastqs(wildcards):
