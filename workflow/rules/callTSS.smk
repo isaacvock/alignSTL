@@ -187,9 +187,9 @@ rule make_TSSome:
         "../envs/TSSome.yml"
     threads: 1
     shell:
-        """
+        r"""
         chmod +x {params.Rscript}
-        R {params.Rscript} \
+        {params.Rscript} \
             --fasta {input.fasta} \
             --bed {input.bed} \
             --output_fasta {output.fasta} \

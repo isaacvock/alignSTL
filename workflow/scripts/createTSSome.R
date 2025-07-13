@@ -1,3 +1,4 @@
+#!/usr/bin/env Rscript
 ### PURPOSE OF THIS SCRIPT
 ## Create a TSS FASTA and GTF file from the TSScall output.
 ## 
