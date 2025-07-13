@@ -39,6 +39,8 @@ def get_target():
         )
     )
 
+    return target
+
 
 ### FastQC input info
 
