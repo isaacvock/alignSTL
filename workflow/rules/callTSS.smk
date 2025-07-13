@@ -33,7 +33,7 @@ rule align_ctl:
 
 rule merge_ctl:
     input:
-        expand("results/align_ctl/{CTL}.bam", CTL_SAMPLES),
+        expand("results/align_ctl/{CTL}.bam", CTL = CTL_SAMPLES),
     output:
         "results/merge_ctl/merged.bam"
     threads: 8
