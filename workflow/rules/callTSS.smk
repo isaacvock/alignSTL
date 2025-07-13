@@ -79,10 +79,12 @@ rule make_forward_bedgraph_ctl:
     threads: 1
     conda:
         "../envs/bedtools.yml"
+    params:
+        shellscript=workflow.source_path("../scripts/bedtools.sh"),
     shell:
         """
-        # Make bedgraph
-        bedtools genomecov -ibam {input} -bg -5 -strand + | awk '{{ printf "%s\t%d\t%d\t%d\n", $1,$2,$3,$4 }}' > {output}
+        chmod +x {params.shellscript}
+        {params.shellscript} {input} {output} &> {log}
         """
 
 rule make_reverse_bedgraph_ctl:
@@ -93,10 +95,12 @@ rule make_reverse_bedgraph_ctl:
     threads: 1
     conda:
         "../envs/bedtools.yml"  
+    params:
+        shellscript=workflow.source_path("../scripts/bedtools.sh"),
     shell:
         """
-        # Make bedgraph
-        bedtools genomecov -ibam {input} -bg -5 -strand - | awk '{{ printf "%s\t%d\t%d\t%d\n", $1,$2,$3,$4 }}' > {output.reverse}
+        chmod +x {params.shellscript}
+        {params.shellscript} {input} {output} &> {log}
         """
 
 ### Get chromosome size information from bam file

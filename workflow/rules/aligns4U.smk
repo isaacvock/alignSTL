@@ -77,9 +77,15 @@ elif config["s4U_aligner"] == "grandRescue":
 
 elif config["s4U_aligner"] == "bismark":
 
-    dummy = 2 + 2
-    # rule align_all:
-    #     input:
+    rule align_all:
+        input:
+            sample=["results/trimmed/{sample}.1.fastq"],
+        output:
+            "results/align_all/{sample}.bam",
+        shell:
+            """
+            bismark -p {threads} --genome bismark_genome/ {input.sample} -o /results/align_all/
+            """
 
 elif config["s4U_aligner"] == "bowtie2":
 

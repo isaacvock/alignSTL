@@ -79,5 +79,5 @@ rule bismark_prepare_genome:
         ""
     shell:
         """
-        bismark_genome_preparation --path_to_aligner ./ bismark_genome/
+        bismark_genome_preparation {params.extra} bismark_genome/
         """
