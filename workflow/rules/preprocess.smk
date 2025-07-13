@@ -27,7 +27,7 @@ rule fastqc:
         get_fastqc_read,
     output:
         html="results/fastqc/{sample}_r{read}.html",
-        zip="results/fastqc/{sample}_r{read}_fastqc.zip",
+        zip="results/fastqc/{sample}_r{read}.zip",
     log:
         "logs/fastqc/{sample}_r{read}.log",
     params:
