@@ -94,7 +94,7 @@ rule make_reverse_bedgraph_ctl:
 ### Get chromosome size information from bam file
 rule get_chr_sizes:
     input:
-        expand("results/sorted_bam/{sample_one}.bam", sample_one=CTL_SAMPLES[0]),
+        "results/filter_and_sort_ctl/filter_and_sort.bam",
     output:
         "results/get_chr_sizes/genome.chrom.sizes",
     log:
