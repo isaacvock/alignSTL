@@ -146,7 +146,7 @@ rule callTSS:
             --bidirectional_threshold {params.bidirectional_thresh} \
             --cluster_threshold {params.cluster_thresh} \
             --cluster_bed {output.clusters} \
-            --detail_file {output.detail} \
+            --detail_file {output.details} \
             --annotation_file {input.anno} \
             --call_method {params.call_method} \
             --bin_winner_size {params.bin_winner_size} \
