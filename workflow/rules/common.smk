@@ -51,12 +51,12 @@ def get_fastqc_read(wildcards):
     )
 
 
-get_input_fastqs(wildcards):
+def get_input_fastqs(wildcards):
 
     fastq_path = config["samples"].get(wildcards.sample, None)
     if fastq_path is None:
         raise ValueError(f"No path found for sample {wildcards.sample}")
-        
+
     print(f"path is: {fastq_path}")
     current_directory = os.getcwd()
     print("Current Working Directory:", current_directory)
