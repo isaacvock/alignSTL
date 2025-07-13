@@ -166,7 +166,7 @@ rule make_TSSome:
         Rscript=workflow.source_path("../scripts/createTSSome.R"),
         extra=config.get("createTSSome_extra")
     log:
-        "logs/make_TSSome/{ctl}.log"
+        "logs/make_TSSome/makeTSSome.log"
     conda:
         "../envs/TSSome.yml"
     threads: 1
