@@ -32,6 +32,7 @@ else:
     ALIGN_ALL_REF = config.get("genome_fasta")
 
 
+
 ### What is desired final output?
 
 def get_target():

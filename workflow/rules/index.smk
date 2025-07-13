@@ -23,9 +23,14 @@ rule bowtie2_build_genome:
         "logs/bowtie2_build/build.log",
     params:
         extra=config.get("bowtie2_build_genome_extra"),
+        index=config.get("bowtie2_index"),
     threads: 20
-    wrapper:
-        "v7.2.0/bio/bowtie2/build"
+    conda:
+        "../envs/bowtie2.yml"
+    shell:
+        """
+        bowtie2-build --threads {threads} {params.extra} {input.ref} {params.index} &> {log}
+        """
 
 
 rule bowtie2_build_TSSome:
@@ -44,7 +49,12 @@ rule bowtie2_build_TSSome:
     log:
         "logs/bowtie2_build/build.log",
     params:
-        extra=config.get("bowtie2_build_TSSome_extra"),
+        extra=config.get("bowtie2_build_genome_extra"),
+        index=config.get("bowtie2_TSS_index"),
     threads: 20
-    wrapper:
-        "v7.2.0/bio/bowtie2/build"
+    conda:
+        "../envs/bowtie2.yml"
+    shell:
+        """
+        bowtie2-build --threads {threads} {params.extra} {input.ref} {params.index} &> {log}
+        """
