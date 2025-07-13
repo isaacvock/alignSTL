@@ -11,6 +11,13 @@ import os
 # and to aid in defining wildcards
 SAMP_NAMES = list(config.get("samples").keys())
 
+
+if config.get("PE_input", True):
+    READ_NAMES = ["1", "2"]
+
+else:
+    READ_NAMES = ["1"]
+
 CTL_SAMPLES = list(config.get("ctl_samples"))
 
 # Which alignment index/reference genome to use?

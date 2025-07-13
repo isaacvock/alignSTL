@@ -5,6 +5,7 @@ samples:
 
 ctl_samples: ["nos4U_1"]
 
+PE_input: True
 
 genome_fasta: "data/genomes/genome.fasta"
 genome_gtf: "data/genomes/genome.gtf"

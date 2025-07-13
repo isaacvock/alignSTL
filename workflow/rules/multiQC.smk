@@ -4,7 +4,7 @@ rule multiqc:
         expand(
             "results/fastqc/{sample}_r{read}.{ext}",
             sample=SAMP_NAMES,
-            read=["1", "2"],
+            read=READ_NAMES,
             ext=["html", "zip"],
         ),
     output:
