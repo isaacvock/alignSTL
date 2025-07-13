@@ -11,7 +11,7 @@ import os
 # and to aid in defining wildcards
 SAMP_NAMES = list(config.get("samples").keys())
 
-CTL_SAMPLES = list(config.get("control_samples"))
+CTL_SAMPLES = list(config.get("ctl_samples"))
 
 # Which alignment index/reference genome to use?
 if config.get("align_target", "TSSome") == "TSSome":
