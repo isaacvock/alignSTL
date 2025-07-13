@@ -12,7 +12,7 @@ if config.get("PE_input", True):
         output:
             fastq1="results/trimmed/{sample}.1.fastq",
             fastq2="results/trimmed/{sample}.2.fastq",
-            qc="trimmed/{sample}.qc.txt",
+            qc="results/trimmed/{sample}.qc.txt",
         params:
             adapters=config["adapters"],
             extra=config["cutadapt_extra"]
@@ -49,7 +49,7 @@ else:
             get_input_fastqs,
         output:
             fastq="results/trimmed/{sample}.1.fastq",
-            qc="trimmed/{sample}.qc.txt",
+            qc="results/trimmed/{sample}.qc.txt",
         params:
             adapters=config["adapters"],
             extra=config["cutadapt_extra"]
