@@ -81,6 +81,8 @@ rule make_forward_bedgraph_ctl:
         "../envs/bedtools.yml"
     params:
         shellscript=workflow.source_path("../scripts/bedtools.sh"),
+    log:
+        "logs/make_forward_bedgraph_ctl/make_forward_bedgraph_ctl.log",
     shell:
         """
         chmod +x {params.shellscript}
@@ -97,6 +99,8 @@ rule make_reverse_bedgraph_ctl:
         "../envs/bedtools.yml"  
     params:
         shellscript=workflow.source_path("../scripts/bedtools.sh"),
+    log:
+        "logs/make_reverse_bedgraph_ctl/make_reverse_bedgraph_ctl.log",
     shell:
         """
         chmod +x {params.shellscript}
