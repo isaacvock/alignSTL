@@ -22,7 +22,7 @@ if config["s4U_aligner"] == "ngm":
             """
 
 
-else if config["s4U_aligner"] == "grandRescue":
+elif config["s4U_aligner"] == "grandRescue":
 
     ### NOT COMPLETE; MAYBE NEVER AS grandRescue IS VERY BUGGY
 
@@ -74,12 +74,12 @@ else if config["s4U_aligner"] == "grandRescue":
     #         """
 
 
-else if config["s4U_aligner"] == "bismark":
+elif config["s4U_aligner"] == "bismark":
 
     # rule align_all:
     #     input:
 
-else if config["s4U_aligner"] == "bowtie2":
+elif config["s4U_aligner"] == "bowtie2":
 
     rule align_all:
         input:
