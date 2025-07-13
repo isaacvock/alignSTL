@@ -74,7 +74,7 @@ rule make_forward_bedgraph_ctl:
     shell:
         """
         # Make bedgraph
-        bedtools genomecov -ibam {input} -bg -5 -strand + | awk '{ printf "%s \t %d \t %d \t %d\n", $1,$2,$3,$4 }' > {output}
+        bedtools genomecov -ibam {input} -bg -5 -strand + | awk '{{ printf "%s\t%d\t%d\t%d\n", $1,$2,$3,$4 }}' > {output}
         """
 
 rule make_reverse_bedgraph_ctl:
@@ -88,7 +88,7 @@ rule make_reverse_bedgraph_ctl:
     shell:
         """
         # Make bedgraph
-        bedtools genomecov -ibam {input} -bg -5 -strand - | awk '{ printf "%s \t %d \t %d \t %d\n", $1,$2,$3,$4 }' > {output.reverse}
+        bedtools genomecov -ibam {input} -bg -5 -strand - | awk '{{ printf "%s\t%d\t%d\t%d\n", $1,$2,$3,$4 }}' > {output.reverse}
         """
 
 ### Get chromosome size information from bam file
