@@ -27,6 +27,10 @@ option_list <- list(
     help = "Path to TSS bed file"
   ),
   make_option(
+    c("--details", type = "character"),
+    help = "Path to TSS bed details file"
+  ),
+  make_option(
     c("--output_fasta", type = "character"),
     help = "Path to output FASTA file"
   ),
@@ -86,7 +90,7 @@ TSSbed <- fread(
 )
 
 TSSdeets <- fread(
-  opt$bed,
+  opt$details,
   skip = 1,
   header = FALSE,
   col.names = c("TSSid", "Type", "transcripts",

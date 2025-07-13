@@ -176,6 +176,7 @@ rule make_TSSome:
     input:
         bed="results/callTSS/callTSS.tss.bed",
         fasta=config.get("genome_fasta"),
+        details="results/callTSS/callTSS.tss_detail.txt",
     output:
         fasta="results/make_TSSome/TSSome.fasta",
     params:
@@ -193,5 +194,6 @@ rule make_TSSome:
             --fasta {input.fasta} \
             --bed {input.bed} \
             --output_fasta {output.fasta} \
+            --details {input.details} \
             {params.extra} &> {log}
         """
