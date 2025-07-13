@@ -75,5 +75,5 @@ else:
             mem_mb=9000,
         threads: 4
         wrapper:
-            "v5.7.0/bio/fastqc"
+            "v2.2.1/bio/fastqc"
         
