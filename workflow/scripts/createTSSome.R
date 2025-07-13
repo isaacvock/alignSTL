@@ -169,7 +169,7 @@ mcols(TSSgr_merged)$TSSid <- sapply(
       
     }else{
       
-      return(TSS_table$TSSid[1])
+      return(TSS_table$`TSS ID`[1])
       
     }
     
