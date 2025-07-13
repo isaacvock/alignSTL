@@ -26,6 +26,7 @@ elif config["s4U_aligner"] == "grandRescue":
 
     ### NOT COMPLETE; MAYBE NEVER AS grandRescue IS VERY BUGGY
 
+    dummy = 2 + 2
     # rule prep_pseduotranscriptome:
     #     input:
     #         fasta=ALIGN_ALL_REF,
@@ -76,6 +77,7 @@ elif config["s4U_aligner"] == "grandRescue":
 
 elif config["s4U_aligner"] == "bismark":
 
+    dummy = 2 + 2
     # rule align_all:
     #     input:
 
