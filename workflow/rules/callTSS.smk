@@ -8,7 +8,7 @@
     
 rule align_ctl:
     input:
-        sample=["results/trimmed/{ctl}.1.fastq"]
+        sample=["results/trimmed/{ctl}.1.fastq"],
         idx=muitiext(
             config.get("bowtie2_index"),
             ".1.bt2",

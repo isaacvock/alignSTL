@@ -50,3 +50,28 @@ def get_fastqc_read(wildcards):
         READ=wildcards.read,
     )
 
+
+get_input_fastqs(wildcards):
+
+    fastq_path = config["samples"].get(wildcards.sample, None)
+    if fastq_path is None:
+        raise ValueError(f"No path found for sample {wildcards.sample}")
+        
+    print(f"path is: {fastq_path}")
+    current_directory = os.getcwd()
+    print("Current Working Directory:", current_directory)
+    all_files = os.listdir(fastq_path)
+    print(f"All files in directory: {all_files}")
+
+    fastq_files = []
+
+    # List all entries in the directory and store full paths in the list
+    for entry in os.listdir(fastq_path):
+        full_path = os.path.join(fastq_path, entry)
+        fastq_files.append(full_path)
+
+    # Filter files to only include those that end with .fastq or .fastq.gz
+    # fastq_files = [f"data/fastq/{wildcards.sample}/{wildcards.sample}.{n}.fastq.gz" for n in ("1", "2")] #sorted([os.path.join(directory, f) for f in all_files if f.endswith('.fastq') or f.endswith('.fastq.gz')])
+    # fastq_files = sorted(glob.glob(f"{fastq_path}/*.fastq*"))
+    print(f"Found files: {sorted(fastq_files)}")
+    return sorted(fastq_files)
