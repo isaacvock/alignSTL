@@ -8,10 +8,10 @@ if config["s4U_aligner"] == "ngm":
     rule align_all:
         input:
             read="results/trimmed/{sample}.1.fastq",
-            ref=ALIGN_ALL_REF
+            ref=ALIGN_ALL_REF,
         output:
-            sam="results/align_all/{sample}.sam"
-            bam="results/align_all/{sample}.bam"
+            sam="results/align_all/{sample}.sam",
+            bam="results/align_all/{sample}.bam",
         threads: 20
         conda:
             "../envs/ngm.yml"
@@ -94,9 +94,9 @@ else if config["s4U_aligner"] == "bowtie2"
                 ".rev.2.bt2",
             ),
         output:
-            "results/align_all/{sample}.bam"
+            "results/align_all/{sample}.bam",
         log:
-            "logs/align_all/{sample}.log"
+            "logs/align_all/{sample}.log",
         params:
             extra=config["align_all_extra"]
         threads: 20
