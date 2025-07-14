@@ -39,7 +39,7 @@ elif config["s4U_aligner"] == "bismark":
                 ".rev.2.bt2",
             ),
             AG=multiext(
-                "bismark_genome/Bisulfite_Genome/GA_conversion/BS_GS",
+                "bismark_genome/Bisulfite_Genome/GA_conversion/BS_GA",
                 ".1.bt2",
                 ".2.bt2",
                 ".3.bt2",
