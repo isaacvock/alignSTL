@@ -201,6 +201,8 @@ TSS_seqs <- BSgenome::getSeq(
 
 ##### STEP 2: Create and write final output #####
 
+names(TSS_seqs) <- TSSgr_merged$TSSid
+
 # FASTA file
 writeXStringSet(
   TSS_seqs,
