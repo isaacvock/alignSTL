@@ -15,5 +15,6 @@ rule multiqc:
         "logs/multiqc/multiqc.log",
     conda:
         "../envs/multiqc.yaml"
+    threads: 1
     script:
         "../scripts/multiQC.py"

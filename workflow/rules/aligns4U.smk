@@ -49,13 +49,14 @@ elif config["s4U_aligner"] == "bismark":
             ),
         output:
             bam="results/align_all/{sample}.bam",
-            temp(tmp="results/align_all/{sample}.txt")
+            tmp=temp("results/align_all/{sample}.txt")
         log:
             "logs/align_all/{sample}.log",
         params:
             extra=config.get("bismark_align_extra", ""),
         conda:
             "../envs/bismark.yml"
+        threads: 20
         shell:
             """
             touch {output.tmp}

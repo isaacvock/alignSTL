@@ -73,6 +73,7 @@ rule copy_genome:
         "logs/copy_genome/copy.log",
     conda:
         "../envs/bismark.yml"
+    threads: 1
     shell:
         "cp {input} {output} &> {log}"
 
@@ -105,6 +106,7 @@ rule bismark_prepare_genome:
         "logs/bismark_prepare_genome/bismark.log",
     conda:
         "../envs/bismark.yml"
+    threads: 20
     shell:
         """
         bismark_genome_preparation --slam {params.extra} bismark_genome/ &> {log}
