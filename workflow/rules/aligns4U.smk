@@ -49,7 +49,7 @@ elif config["s4U_aligner"] == "bismark":
             ),
         output:
             bam="results/align_all/{sample}.bam",
-            tmp=temp("results/align_all/{sample}.txt")
+            tmp=temp("results/align_all/{sample}.txt"),
         log:
             "logs/align_all/{sample}.log",
         params:
