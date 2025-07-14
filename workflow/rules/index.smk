@@ -82,7 +82,8 @@ rule bismark_prepare_genome:
         genome="bismark_genome/genome.fasta",
     output:
         TC=multiext(
-            "bismark_genome/Bisulfite_Genome/CT_conversion/BS_CT" ".1.bt2",
+            "bismark_genome/Bisulfite_Genome/CT_conversion/BS_CT",
+            ".1.bt2",
             ".2.bt2",
             ".3.bt2",
             ".4.bt2",
@@ -90,7 +91,8 @@ rule bismark_prepare_genome:
             ".rev.2.bt2",
         ),
         AG=multiext(
-            "bismark_genome/Bisulfite_Genome/GA_conversion/BS_GS" ".1.bt2",
+            "bismark_genome/Bisulfite_Genome/GA_conversion/BS_GS",
+            ".1.bt2",
             ".2.bt2",
             ".3.bt2",
             ".4.bt2",

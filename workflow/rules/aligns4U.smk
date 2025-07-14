@@ -30,7 +30,8 @@ elif config["s4U_aligner"] == "bismark":
         input:
             sample=["results/trimmed/{sample}.1.fastq"],
             TC=multiext(
-                "bismark_genome/Bisulfite_Genome/CT_conversion/BS_CT" ".1.bt2",
+                "bismark_genome/Bisulfite_Genome/CT_conversion/BS_CT",
+                ".1.bt2",
                 ".2.bt2",
                 ".3.bt2",
                 ".4.bt2",
@@ -38,7 +39,8 @@ elif config["s4U_aligner"] == "bismark":
                 ".rev.2.bt2",
             ),
             AG=multiext(
-                "bismark_genome/Bisulfite_Genome/GA_conversion/BS_GS" ".1.bt2",
+                "bismark_genome/Bisulfite_Genome/GA_conversion/BS_GS",
+                ".1.bt2",
                 ".2.bt2",
                 ".3.bt2",
                 ".4.bt2",
