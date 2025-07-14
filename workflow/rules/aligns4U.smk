@@ -83,9 +83,13 @@ elif config["s4U_aligner"] == "bismark":
             sample=["results/trimmed/{sample}.1.fastq"],
         output:
             "results/align_all/{sample}.bam",
+        log:
+            "logs/align_all/{sample}.log",
+        params:
+            extra=config.get("bismark_align_extra", ""),
         shell:
             """
-            bismark -p {threads} --genome bismark_genome/ {input.sample} -o /results/align_all/
+            bismark -p {threads} --slam {params.extra} --genome bismark_genome/ {input.sample} -o /results/align_all/ --basename {wildcards.sample}
             """
 
 elif config["s4U_aligner"] == "bowtie2":

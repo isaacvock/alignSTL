@@ -76,8 +76,25 @@ rule bismark_prepare_genome:
     input:
         genome="bismark_genome/genome.fasta"
     output:
-        ""
+        TC=multiext("bismark_genome/Bisfulfite_Genome/CT_conversion/BS_CT"
+                    ".1.bt2",
+                    ".2.bt2",
+                    ".3.bt2",
+                    ".4.bt2",
+                    ".rev.1.bt2",
+                    ".rev.2.bt2"),
+        AG=multiext("bismark_genome/Bisfulfite_Genome/GA_conversion/BS_GS"
+                    ".1.bt2",
+                    ".2.bt2",
+                    ".3.bt2",
+                    ".4.bt2",
+                    ".rev.1.bt2",
+                    ".rev.2.bt2"),
+    params:
+        extra=config.get("bismark_prep_genome_extra", ""),
+    log:
+        "logs/bismark_prepare_genome/bismark.log"
     shell:
         """
-        bismark_genome_preparation {params.extra} bismark_genome/
+        bismark_genome_preparation --slam {params.extra} bismark_genome/ &> {log}
         """
