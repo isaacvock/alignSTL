@@ -1,0 +1,92 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches_ignore: []
+
+jobs:
+  formatting:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout with submodules
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 0
+    - name: Formatting
+      uses: github/super-linter@v5
+      env:
+        VALIDATE_ALL_CODEBASE: false
+        DEFAULT_BRANCH: featurecount
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VALIDATE_SNAKEMAKE_SNAKEFMT: true
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Linting
+      uses: snakemake/snakemake-github-action@v1.25.1
+      with:
+        directory: .test
+        snakefile: workflow/Snakefile
+        args: "--configfile .test/configs/ngm_TSS.yml --lint"
+
+  run-workflow:
+    runs-on: ubuntu-latest
+    needs:
+      - linting
+      - formatting
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Test workflow (NGM TSS)
+      uses: ezherman/snakemake-github-action@b6bd319468ad9a049d37058554ebcd52eca38c92
+      with:
+        directory: .test
+        snakefile: workflow/Snakefile
+        args: "--configfile .test/configs/ngm_TSS.yml --use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache"
+    - name: Test workflow (NGM Genome)
+      uses: ezherman/snakemake-github-action@b6bd319468ad9a049d37058554ebcd52eca38c92
+      with:
+        directory: .test
+        snakefile: workflow/Snakefile
+        args: "--configfile .test/configs/ngm_genome.yml --use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache"
+    - name: Clean up
+      uses: ezherman/snakemake-github-action@b6bd319468ad9a049d37058554ebcd52eca38c92
+      with:
+        directory: .test
+        snakefile: workflow/Snakefile
+        args: "--configfile .test/configs/ngm_genome.yml --use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache --delete-all-output"
+    - name: Test workflow (Bismark TSS)
+      uses: ezherman/snakemake-github-action@b6bd319468ad9a049d37058554ebcd52eca38c92
+      with:
+        directory: .test
+        snakefile: workflow/Snakefile
+        args: "--configfile .test/configs/bismark_TSS.yml --use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache"
+    - name: Test workflow (NGM Genome)
+      uses: ezherman/snakemake-github-action@b6bd319468ad9a049d37058554ebcd52eca38c92
+      with:
+        directory: .test
+        snakefile: workflow/Snakefile
+        args: "--configfile .test/configs/bismark_genome.yml --use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache"
+    - name: Clean up
+      uses: ezherman/snakemake-github-action@b6bd319468ad9a049d37058554ebcd52eca38c92
+      with:
+        directory: .test
+        snakefile: workflow/Snakefile
+        args: "--configfile .test/configs/bismark_genome.yml --use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache --delete-all-output"
+    - name: Test workflow (bowtie2 TSS)
+      uses: ezherman/snakemake-github-action@b6bd319468ad9a049d37058554ebcd52eca38c92
+      with:
+        directory: .test
+        snakefile: workflow/Snakefile
+        args: "--configfile .test/configs/bowtie2_TSS.yml --use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache"
+    - name: Test workflow (bowtie2 Genome)
+      uses: ezherman/snakemake-github-action@b6bd319468ad9a049d37058554ebcd52eca38c92
+      with:
+        directory: .test
+        snakefile: workflow/Snakefile
+        args: "--configfile .test/configs/bowtie2_genome.yml --use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache"

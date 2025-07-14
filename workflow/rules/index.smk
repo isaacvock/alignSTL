@@ -64,7 +64,7 @@ rule bowtie2_build_TSSome:
 
 rule copy_genome:
     input:
-        config.get("genome_fasta"),
+        ALIGN_ALL_REF,  
     output:
         "bismark_genome/genome.fasta",
     log:
@@ -76,14 +76,14 @@ rule bismark_prepare_genome:
     input:
         genome="bismark_genome/genome.fasta"
     output:
-        TC=multiext("bismark_genome/Bisfulfite_Genome/CT_conversion/BS_CT"
+        TC=multiext("bismark_genome/Bisulfite_Genome/CT_conversion/BS_CT"
                     ".1.bt2",
                     ".2.bt2",
                     ".3.bt2",
                     ".4.bt2",
                     ".rev.1.bt2",
                     ".rev.2.bt2"),
-        AG=multiext("bismark_genome/Bisfulfite_Genome/GA_conversion/BS_GS"
+        AG=multiext("bismark_genome/Bisulfite_Genome/GA_conversion/BS_GS"
                     ".1.bt2",
                     ".2.bt2",
                     ".3.bt2",

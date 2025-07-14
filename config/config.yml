@@ -73,20 +73,46 @@ multiqc_extra: "--verbose"
 align_ctl_extra: ""
 
 
+##### ADDITIONAL NEXTGENMAP ALIGNMENT SETTINGS #####
+
+NGM_extra: ""
 
 
-### Path to index directories and prefixes
+##### ADDITIONAL BISMARK SETTINGS #####
+
+
+# Additional settings for indexing (prepping genome in Bismark lingo)
+bismark_prep_genome_extra: ""
+
+
+# Additional settings for alignment
+  # -p, --slam, -o, and --basename are all set by pipeline
+bismark_align_extra: ""
+
+
+
+##### ADDITIONAL BOWTIE SETTINGS #####
+
+# Path to index directory and prefix for genome indexing
 bowtie2_index: "index/genome"
 
-bowtie2_TSS_index: "TSS_index/TSS"
-
-bowtie2_build_TSSome_extra: ""
+# Extra parameters for indexing of genome
 bowtie2_build_genome_extra: ""
 
 
+# Path to index directory and prefix for TSSome indexing
+  # Only relevant if align_target == "TSSome"
+bowtie2_TSS_index: "TSS_index/TSS"
 
-### TSScall parameters
 
+# Extra parameters for indexing of TSSome
+  # Only relevant if align_target == "TSSome"
+bowtie2_build_TSSome_extra: ""
+
+
+##### TSScall PARAMETERS #####
+
+# Names are same as in TSScall: https://github.com/lavenderca/TSScall
 TSScall_fdr: 0.001
 TSScall_utss_filter_size: 750
 TSScall_utss_search_window: 250
@@ -98,7 +124,16 @@ annotation_search_window: 1000
 annotation_join_distance: 200
 
 
-### TSSome creation parameters
+##### TSSome Creation PARAMETERS #####
 
+# Current parameters are:
+  # --keep_uTSS (TRUE/FALSE; default = FALSE)
+    # If TRUE, unannotated TSS will be kept in TSSome
+  # --merge_clusters (TRUE/FALSE; default = TRUE)
+    # If TRUE, clusters of TSSs will be merged into a single TSS
+  # --upstream (number; default = 100)
+    # Number of nucleotides upstream of TSS site call to include in TSSome
+  # --downstream (number; default = 100)
+    # Number of nucleotides downstream of TSS site call to include in TSSome
 createTSSome_extra: ""
 

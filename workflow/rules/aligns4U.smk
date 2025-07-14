@@ -14,6 +14,8 @@ if config["s4U_aligner"] == "ngm":
         threads: 20
         log:
             "logs/align_all/{sample}.log"
+        params:
+            extra=config.get("NGM_extra", "")
         conda:
             "../envs/ngm.yml"
         shell:
@@ -81,18 +83,18 @@ elif config["s4U_aligner"] == "bismark":
     rule align_all:
         input:
             sample=["results/trimmed/{sample}.1.fastq"],
-            TC=multiext("bismark_genome/Bisfulfite_Genome/CT_conversion/BS_CT"
+            TC=multiext("bismark_genome/Bisulfite_Genome/CT_conversion/BS_CT"
                     ".1.bt2",
                     ".2.bt2",
                     ".3.bt2",
                     ".4.bt2",
                     ".rev.1.bt2",
                     ".rev.2.bt2"),
-            AG=multiext("bismark_genome/Bisfulfite_Genome/GA_conversion/BS_GS"
+            AG=multiext("bismark_genome/Bisulfite_Genome/GA_conversion/BS_GS"
                         ".1.bt2",
                         ".2.bt2",
                         ".3.bt2",
-                        ".4.bt2",
+                        ".4.bt2", 
                         ".rev.1.bt2",
                         ".rev.2.bt2"),
         output:
@@ -127,8 +129,8 @@ elif config["s4U_aligner"] == "bowtie2":
         log:
             "logs/align_all/{sample}.log",
         params:
-            extra=config.get("align_ctl_extra"),
-            index=config.get("bowtie2_index")
+            extra=config.get("bowtie2_align_extra", ""),
+            index=ALIGN_ALL_INDEX
         threads: 20
         conda:
             "../envs/bowtie2.yml"
