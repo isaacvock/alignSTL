@@ -18,7 +18,7 @@ if config["s4U_aligner"] == "ngm":
             "../envs/ngm.yml"
         shell:
             """
-            ngm -q {input.read} -r {input.ref} -t {threads} -o {output.sam} --slam-seq 2 | samtools view -Sb - > {output} &> {log}
+            ngm -q {input.read} -r {input.ref} -t {threads} --slam-seq 2 | samtools view -Sb - > {output} &> {log}
             """
 
 
