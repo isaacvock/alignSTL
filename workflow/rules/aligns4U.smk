@@ -114,8 +114,9 @@ elif config["s4U_aligner"] == "bowtie2":
             "../envs/bowtie2.yml"
         shell:
             """
+            set -euo pipefail
             bowtie2 --threads {threads} \
                 -U {input.sample} \
-                -x {params.index} {params.extra} \
-                | samtools view -@ {threads} -h -b -o {output} - &> {log}
+                -x {params.index} {params.extra} 2>> {log} \
+                | samtools view -@ {threads} -h -b -o {output} - 2>> {log}
             """

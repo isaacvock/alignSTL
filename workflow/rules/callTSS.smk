@@ -30,10 +30,11 @@ rule align_ctl:
         "../envs/bowtie2.yml"
     shell:
         """
+        set -euo pipefail
         bowtie2 --threads {threads} \
             -U {input.sample} \
-            -x {params.index} {params.extra} \
-            | samtools view -@ {threads} -h -b -o {output} - &> {log}
+            -x {params.index} {params.extra} 2>> {log} \
+            | samtools view -@ {threads} -h -b -o {output} - 2>> {log}
         """
 
 
@@ -65,8 +66,8 @@ rule filter_and_sort_ctl:
         "../envs/samtools.yml"
     shell:
         """
-        samtools view -@ {threads} -b -h -q 2 -F 0x4 -F 0x8 -F 0x100 -F 0x200 -F 0x800 {input} | \
-            samtools sort -@ {threads} - > {output}
+        samtools view -@ {threads} -b -h -q 2 -F 0x4 -F 0x8 -F 0x100 -F 0x200 -F 0x800 {input} 2>> {log} | \
+            samtools sort -@ {threads} - 2>> {log} > {output}
         """
 
 
