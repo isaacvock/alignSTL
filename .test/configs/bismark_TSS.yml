@@ -18,7 +18,7 @@ ctl_samples: ["nos4U_1"]
 # Are input files PE? Even if you provide PE data, only the
 # first read in the pair will be used for alignment, as described
 # in the original STL-seq manuscript
-PE_input: True
+PE_input: False
 
 
 # Genome FASTA file to align to
