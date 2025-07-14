@@ -57,7 +57,7 @@ elif config["s4U_aligner"] == "bismark":
             "../envs/bismark.yml"
         shell:
             """
-            bismark -p {threads} --slam {params.extra} --genome bismark_genome/ {input.sample} -o /results/align_all/ --basename {wildcards.sample}
+            bismark --slam {params.extra} --genome bismark_genome/ {input.sample} -o /results/align_all/ --basename {wildcards.sample}
             """
 
 elif config["s4U_aligner"] == "bowtie2":
