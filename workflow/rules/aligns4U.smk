@@ -87,6 +87,8 @@ elif config["s4U_aligner"] == "bismark":
             "logs/align_all/{sample}.log",
         params:
             extra=config.get("bismark_align_extra", ""),
+        conda:
+            "../envs/bismark.yml"
         shell:
             """
             bismark -p {threads} --slam {params.extra} --genome bismark_genome/ {input.sample} -o /results/align_all/ --basename {wildcards.sample}
