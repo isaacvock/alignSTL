@@ -1,28 +1,36 @@
 
+## Paths to data to process
+# path to directory containing fastq files if bam2bakr is False
+  # fastq files can be either gzipped or unzipped
+  # Each set of fastq files must be in a different directory
 samples:
   nos4U_1: "data/fastqs/nos4U_1/"
   s4U_1: "data/fastqs/s4U_1/"
 
+# Sample IDs for those samples you want to use to call TSS's
+  # Only relevant if align_target == "TSSome".
+  # Each of these samples will be aligned to the provided genome
+  # with bowtie2, and then all of the resulting bam files will
+  # be merged and provided to TSScall. The called TSS will then
+  # be used to create a TSSome to map all samples to.
 ctl_samples: ["nos4U_1"]
 
+# Are input files PE? Even if you provide PE data, only the
+# first read in the pair will be used for alignment, as described
+# in the original STL-seq manuscript
 PE_input: True
 
+
+# Genome FASTA file to align to
 genome_fasta: "data/genomes/genome.fasta"
+
+# Genome annotation file for TSScall
+  # Only relevant if align_target == "TSSome"
 genome_gtf: "data/genomes/genome.gtf"
 
-adapters: "-a ^CGATC...GATCGGAAGAGC -a ^CGATC...GGAAGAGCACAC -A GATCGAGATCGGAAGAGC"
-cutadapt_extra: "--minimum-length=20 -n 2"
-
-fastqc_extra: ""
-
-multiqc_extra: "--verbose --dirs"
-
-align_ctl_extra: ""
 
 
-### Aligners
-
-# Options:
+# Aligner to use for all samples (either to genome or TSSome):
   # 1) "ngm" = NextGeneMap
   # 2) "bismark" = Bismark-assisted 3-base alignment with bowtie2
   # 3) "bowtie2" = bowtie2 4-base alignment
@@ -33,6 +41,38 @@ s4U_aligner: "ngm"
   # 1) "provided": use provided genome FASTA
   # 2) "TSSome": use called TSSome
 align_target: "TSSome"
+
+
+
+##### CUTADAPT SETTINGS #####
+
+# Adapters to be trimmed
+adapters: "-a ^CGATC...GATCGGAAGAGC -a ^CGATC...GGAAGAGCACAC -A GATCGAGATCGGAAGAGC"
+
+# Additional parameters to specify
+cutadapt_extra: "--minimum-length=20 -n 2"
+
+
+##### FASTQC SETTINGS #####
+
+# Additional parameters for fastQC
+fastqc_extra: ""
+
+
+##### MULTIQC SETTINGS #####
+
+# Additional parameters for MultiQC
+multiqc_extra: "--verbose"
+
+
+##### ADDITIONAL ALIGNMENT SETTINGS FOR CTL SAMPLES #####
+# This will always be bowtie2 optional parameters, as
+# ctl samples are always aligned with bowtie2
+
+# Additional alignment parameters
+align_ctl_extra: ""
+
+
 
 
 ### Path to index directories and prefixes

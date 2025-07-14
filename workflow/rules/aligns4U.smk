@@ -81,6 +81,20 @@ elif config["s4U_aligner"] == "bismark":
     rule align_all:
         input:
             sample=["results/trimmed/{sample}.1.fastq"],
+            TC=multiext("bismark_genome/Bisfulfite_Genome/CT_conversion/BS_CT"
+                    ".1.bt2",
+                    ".2.bt2",
+                    ".3.bt2",
+                    ".4.bt2",
+                    ".rev.1.bt2",
+                    ".rev.2.bt2"),
+            AG=multiext("bismark_genome/Bisfulfite_Genome/GA_conversion/BS_GS"
+                        ".1.bt2",
+                        ".2.bt2",
+                        ".3.bt2",
+                        ".4.bt2",
+                        ".rev.1.bt2",
+                        ".rev.2.bt2"),
         output:
             "results/align_all/{sample}.bam",
         log:
