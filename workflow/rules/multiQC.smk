@@ -10,10 +10,13 @@ rule multiqc:
     output:
         "results/multiqc/multiqc_report.html",
     params:
-        extra=config.get("multiqc_extra", ""),
+        # 1. raise / disable the size filter
+        extra="--file-size-limit 0",          # 0 = no limit
+        # 2. hand actual filenames directly to MultiQC
+        use_input_files_only=True,
     log:
         "logs/multiqc/multiqc.log",
     conda:
-        "../envs/multiqc.yaml"
+        "../envs/multiqc.yaml",
     script:
         "../scripts/multiQC.py"
