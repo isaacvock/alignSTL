@@ -10,8 +10,7 @@ if config["s4U_aligner"] == "ngm":
             read="results/trimmed/{sample}.1.fastq",
             ref=ALIGN_ALL_REF,
         output:
-            sam="results/align_all/{sample}.sam",
-            bam="results/align_all/{sample}.bam",
+            "results/align_all/{sample}.bam",
         threads: 20
         log:
             "logs/align_all/{sample}.log"
@@ -19,8 +18,7 @@ if config["s4U_aligner"] == "ngm":
             "../envs/ngm.yml"
         shell:
             """
-            ngm -q {input.read} -r {input.ref} -t {threads} -o {output.sam} --slam-seq 2 &> {log}
-            samtools view -b -@ {threads} -o {output.bam} {output.sam} &> {log}
+            ngm -q {input.read} -r {input.ref} -t {threads} -o {output.sam} --slam-seq 2 | samtools view -Sb - > {output} &> {log}
             """
 
 
