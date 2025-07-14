@@ -47,10 +47,10 @@ align_target: "provided"
 ##### CUTADAPT SETTINGS #####
 
 # Adapters to be trimmed
-adapters: "-a ^CGATC...GATCGGAAGAGC -a ^CGATC...GGAAGAGCACAC -A GATCGAGATCGGAAGAGC"
+adapters: ""
 
 # Additional parameters to specify
-cutadapt_extra: "--minimum-length=20 -n 2"
+cutadapt_extra: "--action=none --minimum-length=20 -n 2"
 
 
 ##### FASTQC SETTINGS #####
