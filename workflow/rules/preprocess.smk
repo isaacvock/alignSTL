@@ -28,8 +28,8 @@ if config.get("PE_input", True):
         input:
             get_fastqc_read,
         output:
-            html="results/fastqc/{sample}_r{read}.html",
-            zip="results/fastqc/{sample}_r{read}.zip",
+            html="results/fastqc/{sample}_r{read}_fastqc.html",
+            zip="results/fastqc/{sample}_r{read}_fastqc.zip",
         log:
             "logs/fastqc/{sample}_r{read}.log",
         params:
@@ -65,8 +65,8 @@ else:
         input:
             get_fastqc_read,
         output:
-            html="results/fastqc/{sample}_r1.html",
-            zip="results/fastqc/{sample}_r1.zip",
+            html="results/fastqc/{sample}_r1_fastqc.html",
+            zip="results/fastqc/{sample}_r1_fastqc.zip",
         log:
             "logs/fastqc/{sample}.log",
         params:

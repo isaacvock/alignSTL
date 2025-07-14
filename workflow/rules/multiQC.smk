@@ -2,7 +2,7 @@
 rule multiqc:
     input:
         expand(
-            "results/fastqc/{sample}_r{read}.{ext}",
+            "results/fastqc/{sample}_r{read}_fastqc.{ext}",
             sample=SAMP_NAMES,
             read=READ_NAMES,
             ext=["html", "zip"],
@@ -10,10 +10,7 @@ rule multiqc:
     output:
         "results/multiqc/multiqc_report.html",
     params:
-        # 1. raise / disable the size filter
-        extra="--file-size-limit 0",          # 0 = no limit
-        # 2. hand actual filenames directly to MultiQC
-        use_input_files_only=True,
+        extra=config.get("multiqc_extra", "")
     log:
         "logs/multiqc/multiqc.log",
     conda:
