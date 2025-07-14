@@ -67,17 +67,3 @@ shell(
     " {input_data}"
     " {log}"
 )
-
-
-# Move files to another destination (if needed)
-for output in snakemake.output:
-    if output.endswith("_data"):
-        ext = "_data"
-    elif output.endswith(".zip"):
-        ext = "_data.zip"
-    else:
-        ext = Path(output).suffix
-
-    default_dest = f"{out_dir}/{file_name}{ext}"
-    if default_dest != output:
-        shell("mv {default_dest} {output}")

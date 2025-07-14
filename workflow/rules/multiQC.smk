@@ -9,7 +9,6 @@ rule multiqc:
         ),
     output:
         "results/multiqc/multiqc_report.html",
-        directory("results/multiqc_data"),
     params:
         extra=config.get("multiqc_extra", ""),
     log:

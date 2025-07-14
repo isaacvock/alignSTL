@@ -13,12 +13,14 @@ if config["s4U_aligner"] == "ngm":
             sam="results/align_all/{sample}.sam",
             bam="results/align_all/{sample}.bam",
         threads: 20
+        log:
+            "logs/align_all/{sample}.log"
         conda:
             "../envs/ngm.yml"
         shell:
             """
-            ngm -q {input.read} -r {input.ref} -t {threads} -o {output.sam} --slam-seq 2
-            samtools view -b -@ {threads} -o {output.bam}
+            ngm -q {input.read} -r {input.ref} -t {threads} -o {output.sam} --slam-seq 2 &> {log}
+            samtools view -b -@ {threads} -o {output.bam} {output.sam} &> {log}
             """
 
 
