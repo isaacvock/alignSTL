@@ -22,41 +22,32 @@ CTL_SAMPLES = list(config.get("ctl_samples"))
 
 # Which alignment index/reference genome to use?
 if config.get("align_target", "TSSome") == "TSSome":
-
     ALIGN_ALL_INDEX = config.get("bowtie2_TSS_index")
     ALIGN_ALL_REF = "results/make_TSSome/TSSome.fasta"
 
 else:
-
     ALIGN_ALL_INDEX = config.get("bowtie2_index")
     ALIGN_ALL_REF = config.get("genome_fasta")
 
 
-
 ### What is desired final output?
+
 
 def get_target():
     target = []
 
     target.append("results/multiqc/multiqc_report.html")
 
-    target.append(
-        expand(
-            "results/align_all/{SAMPLE}.bam",
-            SAMPLE = SAMP_NAMES
-        )
-    )
+    target.append(expand("results/align_all/{SAMPLE}.bam", SAMPLE=SAMP_NAMES))
 
     return target
 
 
 ### FastQC input info
 
+
 def get_fastqc_read(wildcards):
-    
     if config.get("PE_input", True):
-
-
         return expand(
             "results/trimmed/{SID}.{READ}.fastq",
             SID=wildcards.sample,
@@ -64,15 +55,10 @@ def get_fastqc_read(wildcards):
         )
 
     else:
-
-        return expand(
-            "results/trimmed/{SID}.1.fastq",
-            SID=wildcards.sample
-        )       
+        return expand("results/trimmed/{SID}.1.fastq", SID=wildcards.sample)
 
 
 def get_input_fastqs(wildcards):
-
     fastq_path = config["samples"].get(wildcards.sample, None)
     if fastq_path is None:
         raise ValueError(f"No path found for sample {wildcards.sample}")

@@ -5,7 +5,8 @@
 
 
 ### Align samples used for TSScall
-    
+
+
 rule align_ctl:
     input:
         sample=["results/trimmed/{ctl}.1.fastq"],
@@ -19,12 +20,12 @@ rule align_ctl:
             ".rev.2.bt2",
         ),
     output:
-        "results/align_ctl/{ctl}.bam"
+        "results/align_ctl/{ctl}.bam",
     log:
-        "logs/align_ctl/{ctl}.log"
+        "logs/align_ctl/{ctl}.log",
     params:
         extra=config.get("align_ctl_extra"),
-        index=config.get("bowtie2_index")
+        index=config.get("bowtie2_index"),
     threads: 20
     conda:
         "../envs/bowtie2.yml"
@@ -40,14 +41,15 @@ rule align_ctl:
 
 ### Merge and filter bam file for TSScall
 
+
 rule merge_ctl:
     input:
-        expand("results/align_ctl/{CTL}.bam", CTL = CTL_SAMPLES),
+        expand("results/align_ctl/{CTL}.bam", CTL=CTL_SAMPLES),
     output:
-        "results/merge_ctl/merged.bam"
+        "results/merge_ctl/merged.bam",
     threads: 8
     log:
-        "logs/merge_ctl/merge_ctl.log"
+        "logs/merge_ctl/merge_ctl.log",
     conda:
         "../envs/samtools.yml"
     shell:
@@ -58,7 +60,7 @@ rule merge_ctl:
 
 rule filter_and_sort_ctl:
     input:
-        "results/merge_ctl/merged.bam"
+        "results/merge_ctl/merged.bam",
     output:
         "results/filter_and_sort_ctl/filter_and_sort.bam",
     log:
@@ -92,14 +94,15 @@ rule make_forward_bedgraph_ctl:
         {params.shellscript} {input} {output} &> {log}
         """
 
+
 rule make_reverse_bedgraph_ctl:
     input:
         "results/filter_and_sort_ctl/filter_and_sort.bam",
     output:
-        "results/make_bedgraph_ctl/reverse.bedgraph"
+        "results/make_bedgraph_ctl/reverse.bedgraph",
     threads: 1
     conda:
-        "../envs/bedtools.yml"  
+        "../envs/bedtools.yml"
     params:
         shellscript=workflow.source_path("../scripts/bedtools.sh"),
     log:
@@ -109,6 +112,7 @@ rule make_reverse_bedgraph_ctl:
         chmod +x {params.shellscript}
         {params.shellscript} {input} {output} &> {log}
         """
+
 
 ### Get chromosome size information from bam file
 rule get_chr_sizes:
@@ -153,7 +157,7 @@ rule callTSS:
         a_search_win=config.get("annotation_search_window", 1000),
         a_join_dist=config.get("annotation_join_distance", 200),
     log:
-        "logs/callTSS/callTSS.log"
+        "logs/callTSS/callTSS.log",
     conda:
         "../envs/TSScall.yml"
     threads: 1
@@ -188,9 +192,9 @@ rule make_TSSome:
         fasta="results/make_TSSome/TSSome.fasta",
     params:
         Rscript=workflow.source_path("../scripts/createTSSome.R"),
-        extra=config.get("createTSSome_extra")
+        extra=config.get("createTSSome_extra"),
     log:
-        "logs/make_TSSome/makeTSSome.log"
+        "logs/make_TSSome/makeTSSome.log",
     conda:
         "../envs/TSSome.yml"
     threads: 1

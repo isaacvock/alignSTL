@@ -15,13 +15,12 @@ if config.get("PE_input", True):
             qc="results/trimmed/{sample}.qc.txt",
         params:
             adapters=config["adapters"],
-            extra=config["cutadapt_extra"]
+            extra=config["cutadapt_extra"],
         log:
-            "logs/cutadapt/{sample}.log"
+            "logs/cutadapt/{sample}.log",
         threads: 8
-        wrapper: 
+        wrapper:
             "v7.2.0/bio/cutadapt/pe"
-
 
     ### Run fastQC
     rule fastqc:
@@ -39,9 +38,8 @@ if config.get("PE_input", True):
         threads: 4
         wrapper:
             "v2.2.1/bio/fastqc"
-        
 
-else:    
+else:
 
     ### Trim adaptors
     rule cutadapt:
@@ -52,13 +50,12 @@ else:
             qc="results/trimmed/{sample}.qc.txt",
         params:
             adapters=config["adapters"],
-            extra=config["cutadapt_extra"]
+            extra=config["cutadapt_extra"],
         log:
-            "logs/cutadapt/{sample}.log"
+            "logs/cutadapt/{sample}.log",
         threads: 8
-        wrapper: 
+        wrapper:
             "v7.2.0/bio/cutadapt/se"
-
 
     ### Run fastQC
     rule fastqc:
@@ -76,4 +73,3 @@ else:
         threads: 4
         wrapper:
             "v2.2.1/bio/fastqc"
-        

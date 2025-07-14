@@ -6,6 +6,7 @@
 
 ### bowtie2 build index
 
+
 rule bowtie2_build_genome:
     input:
         ref=config.get("genome_fasta"),
@@ -18,7 +19,7 @@ rule bowtie2_build_genome:
             ".4.bt2",
             ".rev.1.bt2",
             ".rev.2.bt2",
-        )
+        ),
     log:
         "logs/bowtie2_build/build.log",
     params:
@@ -45,7 +46,7 @@ rule bowtie2_build_TSSome:
             ".4.bt2",
             ".rev.1.bt2",
             ".rev.2.bt2",
-        )
+        ),
     log:
         "logs/bowtie2_build/build.log",
     params:
@@ -62,40 +63,44 @@ rule bowtie2_build_TSSome:
 
 ### bismark
 
+
 rule copy_genome:
     input:
-        ALIGN_ALL_REF,  
+        ALIGN_ALL_REF,
     output:
         "bismark_genome/genome.fasta",
     log:
-        "logs/copy_genome/copy.log"
+        "logs/copy_genome/copy.log",
     conda:
         "../envs/bismark.yml"
     shell:
         "cp {input} {output} &> {log}"
 
+
 rule bismark_prepare_genome:
     input:
-        genome="bismark_genome/genome.fasta"
+        genome="bismark_genome/genome.fasta",
     output:
-        TC=multiext("bismark_genome/Bisulfite_Genome/CT_conversion/BS_CT"
-                    ".1.bt2",
-                    ".2.bt2",
-                    ".3.bt2",
-                    ".4.bt2",
-                    ".rev.1.bt2",
-                    ".rev.2.bt2"),
-        AG=multiext("bismark_genome/Bisulfite_Genome/GA_conversion/BS_GS"
-                    ".1.bt2",
-                    ".2.bt2",
-                    ".3.bt2",
-                    ".4.bt2",
-                    ".rev.1.bt2",
-                    ".rev.2.bt2"),
+        TC=multiext(
+            "bismark_genome/Bisulfite_Genome/CT_conversion/BS_CT" ".1.bt2",
+            ".2.bt2",
+            ".3.bt2",
+            ".4.bt2",
+            ".rev.1.bt2",
+            ".rev.2.bt2",
+        ),
+        AG=multiext(
+            "bismark_genome/Bisulfite_Genome/GA_conversion/BS_GS" ".1.bt2",
+            ".2.bt2",
+            ".3.bt2",
+            ".4.bt2",
+            ".rev.1.bt2",
+            ".rev.2.bt2",
+        ),
     params:
         extra=config.get("bismark_prep_genome_extra", ""),
     log:
-        "logs/bismark_prepare_genome/bismark.log"
+        "logs/bismark_prepare_genome/bismark.log",
     conda:
         "../envs/bismark.yml"
     shell:

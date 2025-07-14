@@ -13,9 +13,9 @@ if config["s4U_aligner"] == "ngm":
             "results/align_all/{sample}.bam",
         threads: 20
         log:
-            "logs/align_all/{sample}.log"
+            "logs/align_all/{sample}.log",
         params:
-            extra=config.get("NGM_extra", "")
+            extra=config.get("NGM_extra", ""),
         conda:
             "../envs/ngm.yml"
         shell:
@@ -24,79 +24,27 @@ if config["s4U_aligner"] == "ngm":
             ngm -q {input.read} -r {input.ref} -t {threads} --slam-seq 2 2>> {log} | samtools view -Sb - 2>> {log} > {output}
             """
 
-
-elif config["s4U_aligner"] == "grandRescue":
-
-    ### NOT COMPLETE; MAYBE NEVER AS grandRescue IS VERY BUGGY
-
-    dummy = 2 + 2
-    # rule prep_pseduotranscriptome:
-    #     input:
-    #         fasta=ALIGN_ALL_REF,
-    #         gtf=ALIGN_ALL_GTF,
-    #     output:
-    #         ### TO-DO: figure out what files get created
-    #         multiext(
-    #             "gedi_genome/pseudoTranscriptome/",
-    #             ".gtf",
-    #             ".index",
-    #             "_T2C.fa" 
-    #         )
-    #     params:
-    #         gedi_path=config["gedi_path"],
-    #         extra=config["CreatePseudo_extra"],
-    #     threads: 1
-    #     shell:
-    #         """
-    #         {params.gedi_path} -e CreatePseudo -fasta {input.fasta} -gtf {input.gtf} -o gedi_genome/pseudoTranscriptome/
-    #         """
-
-    # rule prep_gediGenome:
-    #     input:
-    #         fasta=ALIGN_ALL_REF,
-    #         gtf=ALIGN_ALL_GTF,
-    #     output:
-    #         ### TO-DO: Figure out what gets created
-    #     params:
-    #         name=config["gedi_genome_name"],
-    #     shell:
-    #         """
-    #         gedi -e IndexGenome -s {input.fasta} -a {input.gtf} -n {params.name}
-    #         """
-
-    # rule prep_gediPseudoGenome:
-    #     input:
-    #         fasta=ALIGN_ALL_PSEUDOREF,
-    #         gtf=ALIGN_ALL_PSEUDOGTF,
-    #     output:
-    #         ### TO-DO: Figure out what gets created
-    #     params:
-    #         name=config["gedi_genome_pseudoname"],
-    #     shell:
-    #         """
-    #         gedi -e IndexGenome -s {input.fasta} -a {input.gtf} -n {params.name}
-    #         """
-
-
 elif config["s4U_aligner"] == "bismark":
 
     rule align_all:
         input:
             sample=["results/trimmed/{sample}.1.fastq"],
-            TC=multiext("bismark_genome/Bisulfite_Genome/CT_conversion/BS_CT"
-                    ".1.bt2",
-                    ".2.bt2",
-                    ".3.bt2",
-                    ".4.bt2",
-                    ".rev.1.bt2",
-                    ".rev.2.bt2"),
-            AG=multiext("bismark_genome/Bisulfite_Genome/GA_conversion/BS_GS"
-                        ".1.bt2",
-                        ".2.bt2",
-                        ".3.bt2",
-                        ".4.bt2", 
-                        ".rev.1.bt2",
-                        ".rev.2.bt2"),
+            TC=multiext(
+                "bismark_genome/Bisulfite_Genome/CT_conversion/BS_CT" ".1.bt2",
+                ".2.bt2",
+                ".3.bt2",
+                ".4.bt2",
+                ".rev.1.bt2",
+                ".rev.2.bt2",
+            ),
+            AG=multiext(
+                "bismark_genome/Bisulfite_Genome/GA_conversion/BS_GS" ".1.bt2",
+                ".2.bt2",
+                ".3.bt2",
+                ".4.bt2",
+                ".rev.1.bt2",
+                ".rev.2.bt2",
+            ),
         output:
             "results/align_all/{sample}.bam",
         log:
@@ -130,7 +78,7 @@ elif config["s4U_aligner"] == "bowtie2":
             "logs/align_all/{sample}.log",
         params:
             extra=config.get("bowtie2_align_extra", ""),
-            index=ALIGN_ALL_INDEX
+            index=ALIGN_ALL_INDEX,
         threads: 20
         conda:
             "../envs/bowtie2.yml"
