@@ -48,7 +48,8 @@ elif config["s4U_aligner"] == "bismark":
                 ".rev.2.bt2",
             ),
         output:
-            "results/align_all/{sample}.bam",
+            bam="results/align_all/{sample}.bam",
+            temp(tmp="results/align_all/{sample}.txt")
         log:
             "logs/align_all/{sample}.log",
         params:
@@ -57,6 +58,7 @@ elif config["s4U_aligner"] == "bismark":
             "../envs/bismark.yml"
         shell:
             """
+            touch {output.tmp}
             bismark --slam {params.extra} --genome bismark_genome/ {input.sample} -o /results/align_all/ --basename {wildcards.sample}
             """
 
