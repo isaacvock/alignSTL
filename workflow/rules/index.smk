@@ -69,6 +69,8 @@ rule copy_genome:
         "bismark_genome/genome.fasta",
     log:
         "logs/copy_genome/copy.log"
+    conda:
+        "../envs/bismark.yml"
     shell:
         "cp {input} {output} &> {log}"
 
@@ -94,6 +96,8 @@ rule bismark_prepare_genome:
         extra=config.get("bismark_prep_genome_extra", ""),
     log:
         "logs/bismark_prepare_genome/bismark.log"
+    conda:
+        "../envs/bismark.yml"
     shell:
         """
         bismark_genome_preparation --slam {params.extra} bismark_genome/ &> {log}

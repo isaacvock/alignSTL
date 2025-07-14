@@ -46,11 +46,13 @@ rule merge_ctl:
     output:
         "results/merge_ctl/merged.bam"
     threads: 8
+    log:
+        "logs/merge_ctl/merge_ctl.log"
     conda:
         "../envs/samtools.yml"
     shell:
         """
-        samtools merge -@ {threads} -o {output} {input}
+        samtools merge -@ {threads} -o {output} {input} &> {log}
         """
 
 
