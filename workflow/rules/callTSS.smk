@@ -25,7 +25,7 @@ rule align_ctl:
         "logs/align_ctl/{ctl}.log",
     params:
         extra=config.get("align_ctl_extra"),
-        index=config.get("bowtie2_index"),
+        index=lambda wildcards, input: input[1].rsplit(".1.bt2", 1)[0],
     threads: 20
     conda:
         "../envs/bowtie2.yml"

@@ -81,7 +81,7 @@ elif config["s4U_aligner"] == "bowtie2":
             "logs/align_all/{sample}.log",
         params:
             extra=config.get("bowtie2_align_extra", ""),
-            index=ALIGN_ALL_INDEX,
+            index=lambda wildcards, input: input[1].rsplit(".1.bt2", 1)[0],
         threads: 20
         conda:
             "../envs/bowtie2.yml"

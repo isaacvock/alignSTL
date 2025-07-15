@@ -24,7 +24,7 @@ rule bowtie2_build_genome:
         "logs/bowtie2_build/build.log",
     params:
         extra=config.get("bowtie2_build_genome_extra"),
-        index=config.get("bowtie2_index"),
+        index=lambda wildcards, output: output[0].rsplit(".1.bt2", 1)[0],
     threads: 20
     conda:
         "../envs/bowtie2.yml"
@@ -51,7 +51,7 @@ rule bowtie2_build_TSSome:
         "logs/bowtie2_build/build.log",
     params:
         extra=config.get("bowtie2_build_genome_extra"),
-        index=config.get("bowtie2_TSS_index"),
+        index=lambda wildcards, output: output[0].rsplit(".1.bt2", 1)[0],
     threads: 20
     conda:
         "../envs/bowtie2.yml"
