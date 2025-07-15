@@ -35,6 +35,10 @@ option_list <- list(
     help = "Path to output FASTA file"
   ),
   make_option(
+    c("--output_gtf", type = "character"),
+    help = "Path to output GTF file"
+  ),
+  make_option(
     c("--keep_uTSS", type = "logical"),
     default = FALSE,
     help = "Keep unobserved TSSs (name: uTSS<ID>)?"
@@ -208,4 +212,11 @@ writeXStringSet(
   TSS_seqs,
   opt$output_fasta,
   format = "fasta"
+)
+
+
+# GTF file
+rtracklayer::export(
+  TSSgr_merged,
+  opt$output_gtf
 )

@@ -190,6 +190,7 @@ rule make_TSSome:
         details="results/callTSS/callTSS.tss_detail.txt",
     output:
         fasta="results/make_TSSome/TSSome.fasta",
+        gtf="results/make_TSSome/TSSome.gtf",
     params:
         Rscript=workflow.source_path("../scripts/createTSSome.R"),
         extra=config.get("createTSSome_extra"),
@@ -205,6 +206,7 @@ rule make_TSSome:
             --fasta {input.fasta} \
             --bed {input.bed} \
             --output_fasta {output.fasta} \
+            --output_gtf {output.gtf} \
             --details {input.details} \
             {params.extra} &> {log}
         """
