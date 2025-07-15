@@ -109,7 +109,7 @@ elif config["s4U_aligner"] == "basal"
         conda:
             "../envs/basal.yml"
         params:
-            config.get("basal_extra", ""),
+            extra=config.get("basal_extra", ""),
         shell:
             """
             basal -a {input.sample} -d {input.ref} -M T:C -o {output} {params.extra}
