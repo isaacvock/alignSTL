@@ -112,5 +112,5 @@ elif config["s4U_aligner"] == "basal"
             extra=config.get("basal_extra", ""),
         shell:
             """
-            basal -a {input.sample} -d {input.ref} -M T:C -o {output} -w 1 -n 0 -p {threads} {params.extra}
+            basal -a {input.sample} -d {input.ref} -M T:C -o {output} -r 0 -p {threads} {params.extra}
             """

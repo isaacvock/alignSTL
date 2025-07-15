@@ -115,7 +115,7 @@ bowtie2_build_TSSome_extra: ""
 ##### ADDITIONAL BASAL SETTINGS #####
 
 # basal alignment settings (see https://github.com/JiejunShi/BASAL for details)
-basal_extra: ""
+basal_extra: "-n 0"
 
 
 ##### TSScall PARAMETERS #####
