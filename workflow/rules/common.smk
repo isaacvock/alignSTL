@@ -40,6 +40,8 @@ def get_target():
 
     target.append(expand("results/align_all/{SAMPLE}.bam", SAMPLE=SAMP_NAMES))
 
+    target.append("results/make_TSSome/TSSome.fasta")
+
     return target
 
 
