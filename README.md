@@ -1,6 +1,6 @@
 # alignSTL: aligning STL-seq data
 
-This Snakemake pipeline is designed to align STL-seq data. It is structured similarly to fastq2EZbakR and can be run in the same way as that pipeline is run:
+This Snakemake pipeline is designed to align STL-seq data. It is structured similarly to [fastq2EZbakR](https://github.com/isaacvock/fastq2EZbakR) and can be run in the same way as that pipeline is run:
 
 ``` bash
 ### 
@@ -35,12 +35,12 @@ Two general alignment strategies are implemented (the align_target parameter in 
 1. Alignment to a provided FASTA file (e.g., a genome)
 2. Alignment to a provided genome FASTA file followed by calling TSS's, creating a TSSome from the called TSS's, and then aligning to the called TSSome
 
-TSS calling is done with TSScall, and is performed in both cases so that the output of this pipeline can be provied as input to fastq2EZbakR (if performing alignment to a provided genome FASTA file, you will need the TSS GTF created by alignSTL to run fastq2EZbakR). 
+TSS calling is done with [TSScall](https://github.com/lavenderca/TSScall), and is performed in both cases so that the output of this pipeline can be provied as input to fastq2EZbakR (if performing alignment to a provided genome FASTA file, you will need the TSS GTF created by alignSTL to run fastq2EZbakR). 
 
 In either case, there are currently 3 aligners implemented in alignSTL (the s4U_aligner parameter in the config sets which of these gets used):
 
-1. NextGenMap: implements a unique scoring function that turns off T-to-C mismatch penalization, perfect for STL-seq data.
-2. Bismark + bowtie2: alignment to a 3-base genome, an extreme form of T-to-C mismatch penalization removal
-3. Bowtie2: Standard 4-base genome alignment
+1. [NextGenMap](https://github.com/Cibiv/NextGenMap): implements a unique scoring function that turns off T-to-C mismatch penalization, perfect for STL-seq data.
+2. [Bismark](https://github.com/FelixKrueger/Bismark) + bowtie2: alignment to a 3-base genome, an extreme form of T-to-C mismatch penalization removal
+3. [Bowtie2](https://github.com/BenLangmead/bowtie2): Standard 4-base genome alignment
 
 
