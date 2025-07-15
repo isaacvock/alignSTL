@@ -102,6 +102,9 @@ fasta <- readDNAStringSet(
   fa_path
 )
 
+### Remove extra metadata
+names(fasta) <- sub("\\s.*$", "", names(fasta))
+
 ### Filter
 
 if(!opt$keep_uTSS){
