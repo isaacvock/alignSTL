@@ -96,7 +96,6 @@ elif config["s4U_aligner"] == "bowtie2":
 
 elif config["s4U_aligner"] == "basal":
 
-
     rule align_all:
         input:
             sample=["results/trimmed/{sample}.1.fastq"],
