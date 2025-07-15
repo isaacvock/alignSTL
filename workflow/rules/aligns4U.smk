@@ -93,3 +93,24 @@ elif config["s4U_aligner"] == "bowtie2":
                 -x {params.index} {params.extra} 2>> {log} \
                 | samtools view -@ {threads} -h -b -o {output} - 2>> {log}
             """
+
+elif config["s4U_aligner"] == "basal"
+
+
+    rule align_all:
+        input:
+            sample=["results/trimmed/{sample}.1.fastq"],
+            ref=ALIGN_ALL_REF,
+        output:
+            "results/align_all/{sample}.bam",
+        log:
+            "logs/align_all/{sample}.log",
+        threads: 20
+        conda:
+            "../envs/basal.yml"
+        params:
+            config.get("basal_extra", ""),
+        shell:
+            """
+            basal -a {input.sample} -d {input.ref} -M T:C -o {output} {params.extra}
+            """

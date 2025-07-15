@@ -34,6 +34,8 @@ genome_gtf: "data/genomes/genome.gtf"
   # 1) "ngm" = NextGeneMap
   # 2) "bismark" = Bismark-assisted 3-base alignment with bowtie2
   # 3) "bowtie2" = bowtie2 4-base alignment
+  # 4) "basal" = BASAL alignment (experimental; recent tool: https://github.com/JiejunShi/BASAL)
+    # If set to "basal", basal needs to be installed and added to your PATH variable.
 s4U_aligner: "ngm"
 
 
@@ -108,6 +110,12 @@ bowtie2_TSS_index: "TSS_index/TSS"
 # Extra parameters for indexing of TSSome
   # Only relevant if align_target == "TSSome"
 bowtie2_build_TSSome_extra: ""
+
+
+##### ADDITIONAL BASAL SETTINGS #####
+
+# basal alignment settings (see https://github.com/JiejunShi/BASAL for details)
+basal_extra: ""
 
 
 ##### TSScall PARAMETERS #####
