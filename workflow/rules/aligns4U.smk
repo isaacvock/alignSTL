@@ -94,7 +94,7 @@ elif config["s4U_aligner"] == "bowtie2":
                 | samtools view -@ {threads} -h -b -o {output} - 2>> {log}
             """
 
-elif config["s4U_aligner"] == "basal"
+elif config["s4U_aligner"] == "basal":
 
 
     rule align_all:
